@@ -1,0 +1,36 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2em;
+    background-color: $tertiary-color;
+    color: $ft-white;
+
+    h1 {
+        cursor: pointer;
+    }
+
+    &__search{
+        input {
+            margin: 0 1em;
+            border-radius: .2em;
+            border: .1em solid $secondary-color;
+            height: 2em;
+            padding: 0 .5em;
+        }
+
+        button {
+            background-color: $primary-color;
+            color: $secondary-color;
+            padding: 0 1em;
+            border-radius: .2em;
+            height: 2em;
+
+            &:hover {
+                transition-duration: .3s;
+                background-color: $quaternary-color;
+                cursor: pointer;
+            }
+        }
+    }
+}

@@ -1,0 +1,32 @@
+.add-employee {
+    margin: 2em 5em;
+
+    .field {
+        margin: 1em 0;
+
+        button {
+            margin-left: 1em;
+            cursor: pointer;
+        }
+    }
+    
+    label {
+        display: inline-block;
+        width: 10em;
+    }
+
+    .actions {
+        button {
+            width: 10em;
+            border-radius: .2em;
+            cursor: pointer;
+            background-color: $tertiary-color;
+            color: $ft-white;
+        }
+        
+        button:last-child {
+            background-color: $primary-color;
+            margin-left: 2em;
+        }
+    }
+}

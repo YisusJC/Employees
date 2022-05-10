@@ -1,0 +1,39 @@
+.employees {
+    width: 100%;
+
+    thead > tr{
+        background-color: $quaternary-color;
+        color: $ft-white;
+    }
+
+    tbody th {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .address {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 10em;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            border-radius: .2em;
+            height: 3em;
+            width: 3em;
+            background-color: $tertiary-color;
+
+            &:hover {
+                cursor: pointer;
+                background-color: $primary-color;
+                animation-duration: .2s;
+            }
+        }
+    }
+}
