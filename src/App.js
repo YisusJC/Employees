@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Header } from './components/Header';
-import { EmployeesContext } from './context/EmployeesContext';
-import { AppRouter } from './router/AppRouter';
-import { BrowserRouter as Router} from 'react-router-dom'
+import React, { useState } from "react";
+import { Header } from "./components/Header";
+import AppContext from "./context/EmployeesContext";
+import { AppRouter } from "./router/AppRouter";
+import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
   const [employees, setEmployees] = useState([
@@ -13,7 +13,7 @@ function App() {
       birth: "19/03/1998",
       phone: "5628903455",
       email: "jaime.armando@aspiresys.com",
-      position: "Front-end Developer"
+      position: "Front-end Developer",
     },
     {
       name: "Jose Armando Straus",
@@ -22,19 +22,19 @@ function App() {
       birth: "19/03/1980",
       phone: "5628903455",
       email: "jose.armando@aspiresys.com",
-      position: "Back-end Developer"
-    }
+      position: "Back-end Developer",
+    },
   ]);
 
   return (
-    <EmployeesContext.Provider value={{employees, setEmployees}}>
-      <Router>
+    <Router>
+      <AppContext.Provider value={{ employees, setEmployees }}>
         <div className="app">
           <Header />
           <AppRouter />
         </div>
-      </Router>
-    </EmployeesContext.Provider>
+      </AppContext.Provider>
+    </Router>
   );
 }
 

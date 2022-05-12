@@ -1,33 +1,42 @@
 import { mount, shallow } from "enzyme/build";
 import { Employees } from "../components/Employees";
-import { EmployeesContext } from "../context/EmployeesContext";
-
-const mockedUsedNavigate = jest.fn();
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useNavigate: () => mockedUsedNavigate,
-}));
+import { AppContext } from "../context/EmployeesContext";
+import { employees, setEmployees } from "./data";
 
 // Employees Jest Tests
 describe("Employees Component", () => {
   // should render without crashing.
   it("should render without crashing", () => {
     const wrapper = shallow(
-      <EmployeesContext.Provider>
+      <AppContext.Provider>
         <Employees />
-      </EmployeesContext.Provider>
+      </AppContext.Provider>
     );
     expect(wrapper).toMatchSnapshot();
   });
 
-  // shopuld execute delete employee function when click button.
-  it("should execute delete employee function when click button", () => {
+  // should execute deleteEmployee function when click button.
+  it("should execute deleteEmployee function when click button", () => {
     const wrapper = mount(
-      <EmployeesContext.Provider>
+      <AppContext.Provider value={{ employees, setEmployees }}>
         <Employees />
-      </EmployeesContext.Provider>
+      </AppContext.Provider>
     );
-    const button = wrapper.find("button").first();
+    const emp = wrapper.find(Employees);
+    const button = emp.find("button").first();
+    button.simulate("click");
+    expect(button.props().onClick).toBeDefined();
+  });
+
+  // should navigate to /edit-employee/:id when click button.
+  it("should navigate to /edit-employee/:id when click button", () => {
+    const wrapper = mount(
+      <AppContext.Provider value={{ employees, setEmployees }}>
+        <Employees />
+      </AppContext.Provider>
+    );
+    const emp = wrapper.find(Employees);
+    const button = emp.find("button").last();
     button.simulate("click");
     expect(button.props().onClick).toBeDefined();
   });

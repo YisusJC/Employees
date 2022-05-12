@@ -1,3 +1,5 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
-export const EmployeesContext = createContext(null);
+export const AppContext = createContext();
+export const useEmployeesContext = () => useContext(AppContext);
+export default AppContext;

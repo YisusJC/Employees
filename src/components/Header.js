@@ -13,10 +13,11 @@ export const Header = () => {
       <div className="header__search">
         <button onClick={() => navigate("/add-employee")}>Add Employee</button>
         <input
+          id="search-input"
           type="text"
           placeholder="write some name..."
           value={sp}
-          onInput={(e) => setSp(e.target.value)}
+          onChange={(e) => setSp(e.target.value)}
         />
         <button
           onClick={() =>

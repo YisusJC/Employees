@@ -1,12 +1,6 @@
 import { mount, shallow } from "enzyme/build";
 import { Header } from "../components/Header";
 
-const mockedUsedNavigate = jest.fn();
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useNavigate: () => mockedUsedNavigate,
-}));
-
 // Header Jest tests
 describe("Header Component", () => {
   // should render without crashing.
@@ -15,42 +9,54 @@ describe("Header Component", () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  // should h1 redirect to home page with useNavigate
-  it("should h1 redirect to home page with useNavigate", () => {
+  // should h1 redirect to home page.
+  it("should h1 redirect to home page", () => {
     const wrapper = mount(<Header />);
     const h1 = wrapper.find("h1");
     h1.simulate("click");
     expect(h1.props().onClick).toBeDefined();
   });
 
-  // should render button with redirection to /add-employee with useNavigate
-  it("should render button with redirection to /add-employee with useNavigate", () => {
+  // should input received just string values.
+  it("should input received just string values", () => {
     const wrapper = mount(<Header />);
+    let input = wrapper.find("#search-input");
+    input.simulate("change", {
+      target: {
+        value: "Jaime",
+      },
+    });
+    input = wrapper.find("#search-input");
+    expect(input.props().value).toBe("Jaime");
+  });
+
+  // should button navigate to '/' if input is empty.
+  it("should button navigate to '/' if input is empty", () => {
+    const wrapper = mount(<Header />);
+    let input = wrapper.find("#search-input");
+    input.simulate("change", {
+      target: {
+        value: "",
+      },
+    });
+    input = wrapper.find("#search-input");
+    expect(input.props().value).toBe("");
     const button = wrapper.find("button").first();
     button.simulate("click");
     expect(button.props().onClick).toBeDefined();
   });
 
-  // should input received just string values with useState()
-  it("should input received just string values with useState", () => {
+  // should redirect to /search/:sp if input value is more than 1 character.
+  it("should navigate to /search/:sp if input value is more than 1 character", () => {
     const wrapper = mount(<Header />);
-    const input = wrapper.find("input");
-    input.simulate("input", {
+    let input = wrapper.find("#search-input");
+    input.simulate("change", {
       target: {
         value: "Jaime",
       },
     });
-  });
-
-  // should render button to redirect to /search/:sp if sp is more than 1 character
-  it("should render button to redirect to /search/:sp if sp is more than 1 character", () => {
-    const wrapper = mount(<Header />);
-    const input = wrapper.find("input");
-    input.simulate("input", {
-      target: {
-        value: "Jaime",
-      },
-    });
+    input = wrapper.find("#search-input");
+    expect(input.props().value).toBe("Jaime");
     const button = wrapper.find("button").last();
     button.simulate("click");
     expect(button.props().onClick).toBeDefined();

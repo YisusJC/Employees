@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import unid from "uniqid";
-import { EmployeesContext } from "../context/EmployeesContext";
+import { useEmployeesContext } from "../context/EmployeesContext";
 import { useNavigate } from "react-router-dom";
 
 export const AddEmployee = () => {
@@ -15,7 +15,7 @@ export const AddEmployee = () => {
     position: "",
   });
 
-  const { employees, setEmployees } = useContext(EmployeesContext);
+  const { employees, setEmployees } = useEmployeesContext();
 
   const saveEmployee = () => {
     setEmployees([...employees, employee]);
@@ -28,9 +28,10 @@ export const AddEmployee = () => {
         <label>Name</label>
         <input
           type="text"
+          id="name"
           placeholder="Full Name"
           value={employee.name}
-          onInput={(e) => setEmployee({ ...employee, name: e.target.value })}
+          onChange={(e) => setEmployee({ ...employee, name: e.target.value })}
         />
       </div>
       <div className="field">
@@ -40,7 +41,7 @@ export const AddEmployee = () => {
           placeholder="DNI"
           id="dni"
           value={employee.dni}
-          onInput={(e) => setEmployee({ ...employee, dni: e.target.value })}
+          onChange={(e) => setEmployee({ ...employee, dni: e.target.value })}
         />
         <button
           onClick={() => {
@@ -58,7 +59,7 @@ export const AddEmployee = () => {
           placeholder="DD/MM/YYYY"
           id="birth"
           value={employee.birth}
-          onInput={(e) => setEmployee({ ...employee, birth: e.target.value })}
+          onChange={(e) => setEmployee({ ...employee, birth: e.target.value })}
         />
       </div>
       <div className="field">
@@ -68,7 +69,9 @@ export const AddEmployee = () => {
           placeholder="Address"
           id="address"
           value={employee.address}
-          onInput={(e) => setEmployee({ ...employee, address: e.target.value })}
+          onChange={(e) =>
+            setEmployee({ ...employee, address: e.target.value })
+          }
         />
       </div>
       <div className="field">
@@ -78,7 +81,7 @@ export const AddEmployee = () => {
           placeholder="Phone"
           id="phone"
           value={employee.phone}
-          onInput={(e) => setEmployee({ ...employee, phone: e.target.value })}
+          onChange={(e) => setEmployee({ ...employee, phone: e.target.value })}
         />
       </div>
       <div className="field">
@@ -88,7 +91,7 @@ export const AddEmployee = () => {
           placeholder="Email"
           id="email"
           value={employee.email}
-          onInput={(e) => setEmployee({ ...employee, email: e.target.value })}
+          onChange={(e) => setEmployee({ ...employee, email: e.target.value })}
         />
       </div>
       <div className="field">
@@ -98,14 +101,16 @@ export const AddEmployee = () => {
           placeholder="Position"
           id="position"
           value={employee.position}
-          onInput={(e) =>
+          onChange={(e) =>
             setEmployee({ ...employee, position: e.target.value })
           }
         />
       </div>
 
       <div className="actions">
-        <button onClick={saveEmployee}>Confirm</button>
+        <button id="save-employee" onClick={saveEmployee}>
+          Confirm
+        </button>
         <button onClick={() => navigate("/")}>Cancel</button>
       </div>
     </div>

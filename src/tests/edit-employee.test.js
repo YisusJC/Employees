@@ -1,11 +1,15 @@
 import { EditEmployee } from "../components/EditEmployee";
 import { mount, shallow } from "enzyme/build";
-import { EmployeesContext } from "../context/EmployeesContext";
+import { AppContext } from "../context/EmployeesContext";
+import { employees, setEmployees } from "./data";
+import { BrowserRouter as Router } from "react-router-dom";
 
-const mockedUsedNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
-  useNavigate: () => mockedUsedNavigate,
+  useParams: () => ({
+    id: "MBJ34368V12P5",
+  }),
+  useRouteMatch: () => ({ url: "/edit-employee/MBJ34368V12P5" }),
 }));
 
 // Add employee Jest tests
@@ -13,9 +17,9 @@ describe("Add employee Component", () => {
   // should render without crashing.
   it("should render without crashing", () => {
     const wrapper = shallow(
-      <EmployeesContext.Provider>
+      <AppContext.Provider value={{ employees, setEmployees }}>
         <EditEmployee />
-      </EmployeesContext.Provider>
+      </AppContext.Provider>
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -23,108 +27,114 @@ describe("Add employee Component", () => {
   // should execute saveEmployee function when click button.
   it("should execute saveEmployee function when click button", () => {
     const wrapper = mount(
-      <EmployeesContext.Provider>
-        <EditEmployee />
-      </EmployeesContext.Provider>
+      <AppContext.Provider value={{ employees, setEmployees }}>
+        <Router>
+          <EditEmployee />
+        </Router>
+      </AppContext.Provider>
     );
-    const button = wrapper.find("button").first();
+    const editEmployee = wrapper.find(EditEmployee).first();
+    const button = editEmployee.find("#save-employee");
     button.simulate("click");
     expect(button.props().onClick).toBeDefined();
+  });
+
+  // should render and save input name
+  it("should render and save input name", () => {
+    const wrapper = mount(
+      <AppContext.Provider value={{ employees, setEmployees }}>
+        <Router>
+          <EditEmployee />
+        </Router>
+      </AppContext.Provider>
+    );
+    const editEmployee = wrapper.find(EditEmployee).first();
+    const input = editEmployee.find("#name");
+    expect(input.props().value).toBe("Jaime Armando Straus");
   });
 
   // should render and save input dni
   it("should render and save input dni", () => {
     const wrapper = mount(
-      <EmployeesContext.Provider>
-        <EditEmployee />
-      </EmployeesContext.Provider>
+      <AppContext.Provider value={{ employees, setEmployees }}>
+        <Router>
+          <EditEmployee />
+        </Router>
+      </AppContext.Provider>
     );
-    const input = wrapper.find("#dni");
-    input.simulate("input", {
-      target: {
-        value: "12345678",
-      },
-    });
-    expect(input.props().value).toBe("12345678");
+    const editEmployee = wrapper.find(EditEmployee).first();
+    const input = editEmployee.find("#dni");
+    expect(input.props().value).toBe("MBJ34368V12P5");
   });
 
   // should render and save input birth
   it("should render and save input birth", () => {
     const wrapper = mount(
-      <EmployeesContext.Provider>
-        <EditEmployee />
-      </EmployeesContext.Provider>
+      <AppContext.Provider value={{ employees, setEmployees }}>
+        <Router>
+          <EditEmployee />
+        </Router>
+      </AppContext.Provider>
     );
-    const input = wrapper.find("#birth");
-    input.simulate("input", {
-      target: {
-        value: "12/08/2022",
-      },
-    });
-    expect(input.props().value).toBe("12/08/2022");
+    const editEmployee = wrapper.find(EditEmployee).first();
+    const input = editEmployee.find("#birth");
+    expect(input.props().value).toBe("19/03/1998");
   });
 
   // should render and save input address
   it("should render and save input address", () => {
     const wrapper = mount(
-      <EmployeesContext.Provider>
-        <EditEmployee />
-      </EmployeesContext.Provider>
+      <AppContext.Provider value={{ employees, setEmployees }}>
+        <Router>
+          <EditEmployee />
+        </Router>
+      </AppContext.Provider>
     );
-    const input = wrapper.find("#address");
-    input.simulate("input", {
-      target: {
-        value: "Los Angeles, CA",
-      },
-    });
+    const editEmployee = wrapper.find(EditEmployee).first();
+    const input = editEmployee.find("#address");
     expect(input.props().value).toBe("Los Angeles, CA");
   });
 
   // should render and save input phone
   it("should render and save input phone", () => {
     const wrapper = mount(
-      <EmployeesContext.Provider>
-        <EditEmployee />
-      </EmployeesContext.Provider>
+      <AppContext.Provider value={{ employees, setEmployees }}>
+        <Router>
+          <EditEmployee />
+        </Router>
+      </AppContext.Provider>
     );
-    const input = wrapper.find("#phone");
-    input.simulate("input", {
-      target: {
-        value: "5620192222",
-      },
-    });
-    expect(input.props().value).toBe("5620192222");
+    const editEmployee = wrapper.find(EditEmployee).first();
+    const input = editEmployee.find("#phone");
+    expect(input.props().value).toBe("5628903455");
   });
 
   // should render and save input email
   it("should render and save input email", () => {
     const wrapper = mount(
-      <EmployeesContext.Provider>
-        <EditEmployee />
-      </EmployeesContext.Provider>
+      <AppContext.Provider value={{ employees, setEmployees }}>
+        <Router>
+          <EditEmployee />
+        </Router>
+      </AppContext.Provider>
     );
-    const input = wrapper.find("#email");
-    input.simulate("input", {
-      target: {
-        value: "jesus.jimenez@aspiresys.com",
-      },
-    });
-    expect(input.props().value).toBe("jesus.jimenez@aspiresys.com");
+    const editEmployee = wrapper.find(EditEmployee).first();
+    const input = editEmployee.find("#email");
+    expect(input.props().value).toBe("jaime.armando@aspiresys.com");
   });
 
   // should render and save input position
   it("should render and save input position", () => {
     const wrapper = mount(
-      <EmployeesContext.Provider>
-        <EditEmployee />
-      </EmployeesContext.Provider>
+      <AppContext.Provider value={{ employees, setEmployees }}>
+        <Router>
+          <EditEmployee />
+        </Router>
+      </AppContext.Provider>
     );
-    const input = wrapper.find("#position");
-    input.simulate("input", {
-      target: {
-        value: "Front-end Developer",
-      },
-    });
+
+    const editEmployee = wrapper.find(EditEmployee).first();
+    const input = editEmployee.find("#position");
     expect(input.props().value).toBe("Front-end Developer");
   });
 });
