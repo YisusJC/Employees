@@ -1,5 +1,5 @@
 import React from "react";
-import { useEmployeesContext } from "../context/EmployeesContext";
+import { useEmployeesContext } from "../../context/EmployeesContext";
 import { useNavigate, useParams } from "react-router-dom";
 
 export const Employees = () => {

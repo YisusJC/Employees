@@ -1,26 +1,24 @@
 import React, { useState } from "react";
 import unid from "uniqid";
-import { useEmployeesContext } from "../context/EmployeesContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEmployeesContext } from "../../context/EmployeesContext";
+import { useNavigate } from "react-router-dom";
 
-export const EditEmployee = () => {
+export const AddEmployee = () => {
   const navigate = useNavigate();
-  const params = useParams();
-
-  const id = params.id;
+  const [employee, setEmployee] = useState({
+    name: "",
+    address: "",
+    dni: "",
+    birth: "",
+    phone: "",
+    email: "",
+    position: "",
+  });
 
   const { employees, setEmployees } = useEmployeesContext();
 
-  const [employee, setEmployee] = useState(
-    employees.find(({ dni }) => dni === id)
-  );
-
-  const saveEmployee = (id, emp) => {
-    setEmployees(
-      employees.map((employee) =>
-        employee.dni === id ? (employee = emp) : employee
-      )
-    );
+  const saveEmployee = () => {
+    setEmployees([...employees, employee]);
     navigate("/");
   };
 
@@ -30,8 +28,8 @@ export const EditEmployee = () => {
         <label>Name</label>
         <input
           type="text"
-          placeholder="Full Name"
           id="name"
+          placeholder="Full Name"
           value={employee.name}
           onChange={(e) => setEmployee({ ...employee, name: e.target.value })}
         />
@@ -100,8 +98,8 @@ export const EditEmployee = () => {
         <label>Position</label>
         <input
           type="text"
-          id="position"
           placeholder="Position"
+          id="position"
           value={employee.position}
           onChange={(e) =>
             setEmployee({ ...employee, position: e.target.value })
@@ -110,10 +108,12 @@ export const EditEmployee = () => {
       </div>
 
       <div className="actions">
-        <button id="save-employee" onClick={() => saveEmployee(id, employee)}>
+        <button id="save-employee" onClick={saveEmployee}>
           Confirm
         </button>
-        <button onClick={() => navigate("/")}>Cancel</button>
+        <button id="cancel-employee" onClick={() => navigate("/")}>
+          Cancel
+        </button>
       </div>
     </div>
   );

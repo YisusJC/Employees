@@ -1,5 +1,5 @@
-import { mount, shallow } from "enzyme/build";
-import { AppRouter } from "../router/AppRouter";
+import { shallow } from "enzyme/build";
+import { AppRouter } from "./AppRouter";
 
 // App Router Jest tests
 describe("App Router Component", () => {

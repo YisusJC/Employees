@@ -1,5 +1,5 @@
 import { mount, shallow } from "enzyme/build";
-import { Header } from "../components/Header";
+import { Header } from "./Header";
 
 // Header Jest tests
 describe("Header Component", () => {

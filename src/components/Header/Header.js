@@ -19,11 +19,7 @@ export const Header = () => {
           value={sp}
           onChange={(e) => setSp(e.target.value)}
         />
-        <button
-          onClick={() =>
-            sp.length > 1 ? navigate(`/search/${sp}`) : navigate("/")
-          }
-        >
+        <button onClick={() => navigate(sp.length > 1 ? `/search/${sp}` : "/")}>
           Search
         </button>
       </div>

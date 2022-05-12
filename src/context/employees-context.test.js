@@ -1,4 +1,4 @@
-import { AppContext } from "../context/EmployeesContext";
+import { AppContext } from "./EmployeesContext";
 
 // Employees Context Jest Tests
 describe("Employees Context", () => {

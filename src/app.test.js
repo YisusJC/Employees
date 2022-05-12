@@ -1,5 +1,5 @@
 import { shallow } from "enzyme/build";
-import App from "../App";
+import App from "./App";
 
 // React 15.6.1
 // Describe App component

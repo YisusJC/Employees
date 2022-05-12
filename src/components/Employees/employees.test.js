@@ -1,7 +1,7 @@
 import { mount, shallow } from "enzyme/build";
-import { Employees } from "../components/Employees";
-import { AppContext } from "../context/EmployeesContext";
-import { employees, setEmployees } from "./data";
+import { Employees } from "./Employees";
+import { AppContext } from "../../context/EmployeesContext";
+import { employees, setEmployees } from "../../data";
 
 // Employees Jest Tests
 describe("Employees Component", () => {
